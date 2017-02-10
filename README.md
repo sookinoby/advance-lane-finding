@@ -91,7 +91,7 @@ The image was transformed to HSV color space from BGR since HSV can be used to e
 ```
 output
 
-![Alt text](output_images/yellow_masked.jpg?raw=true, "Yellow mask")
+![Alt text](output_images/yellow_mask.jpg?raw=true, "Yellow mask")
 
 ###4. White lane marking:
 
@@ -103,7 +103,7 @@ The image was transformed to HSV color space from BGR since HSV can be used to e
     white_hsv_high = np.array([255, 80, 255])
 ```
 output
-![Alt text](output_images/white_masked.jpg?raw=true, "White mask")
+![Alt text](output_images/white_mask.jpg?raw=true, "White mask")
 
 ###5. Red channel mask:
 
@@ -114,7 +114,7 @@ Although the above two mask were able to identify the yellow and white line at m
 ```
 
 output
-![Alt text](output_images/r_masked.jpg?raw=true, "r channel mask")
+![Alt text](output_images/r_mask.jpg?raw=true, "r channel mask")
 
 ###6. Combine masking:
 
