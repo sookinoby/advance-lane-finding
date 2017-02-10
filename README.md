@@ -114,7 +114,7 @@ Although the above two mask were able to identify the yellow and white line at m
 ```
 
 output
-![Alt text](output_images/r_mask.png?raw=true, "r channel mask")
+![Alt text](output_images/color_mask.jpg?raw=true, "r channel mask")
 
 ###6. Combine masking:
 
