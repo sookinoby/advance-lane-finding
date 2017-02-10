@@ -1,7 +1,7 @@
 
 ---
 
-**Advanced Lane Finding Project**
+#Advanced Lane Finding Project
 
 The goals/steps of this project are the following:
 
@@ -15,7 +15,7 @@ The goals/steps of this project are the following:
 * Output visual display of the lane boundaries and numerical estimation of lane curvature and vehicle position.
 
 
-#1. Camera Calibration.
+##1. Camera Calibration.
 
 Cameras calibration is required for correcting distortion of the image caused by the design of camera lens. Although cameras are designed with high precision, the lens can still be little deformed due to temperature, environment, pressure and etc. This will cause light rays to bend by varying degree when they hit the lens. Also, the alignment of the sensor with the camera lens may not be parallel. To correct the image for distortion caused by the lens is one of basic and important step we need to perform before we process the image.
 
@@ -30,7 +30,7 @@ The code for this is contained in calibrate.py
 ![Alt text](output_images/distortion-correction.png?raw=true "camera calibration")
 
 
-#1. Perspective transforms:
+##2. Perspective transforms:
 
 We decided to perform perspective transforms before any filtering, since perspective transform will remove unwanted part of the images and focus on the road.
 When an image is captured by a camera, the objects which are farther away looks smaller in an image. This causes the parallel lines in the real world to appear as if they intersect in images. In order to undo such an effect, we need to transform the image into a perspective free image. Perspective transform also helps to view a scene from the different viewpoint (as if the camera is moved some other position and the picture was taken). So we decided to view the road from a bird-eye point of view. For performing perspective transform we selected four points in an original undistorted image and then mapped it to a set of four points which forms a rectangle.
@@ -66,22 +66,22 @@ The code for this is contained in perspective.py
 ![Alt text](output_images/prespective_transformed.png?raw=true "camera calibration")
 
 
-#Pipeline for Identifying lanes (single images)
+##3.Pipeline for Identifying lanes (single images)
 
 The lane identifying pipeline consists of series of image transformation that will help to identify the lane lines, curvature, and vehicle position with respect to the center of the lane. Once the frame(image) is obtained to the video (can be live stream), the image undergo the following transformation and filtering
 
-##1. Distortion correction:
+###1. Distortion correction:
 
 The image is corrected for distortion using the camera matrix(mtx) , distortion(dist) coeffiecients and undistort() function.
 
 
-##2. Perspective transform:
+###2. Perspective transform:
 
 The image is corrected for perspective and a bird-eye view of image is obtained using the perspective transform matrix (M) and OpenCV's warpPerspective()
 
 
 
-##3. Yellow lane marking:
+###3. Yellow lane marking:
 
 The image was transformed to HSV color space from BGR since HSV can be used to extract particular color component with varying lighting conditions. We used the following yellow color mask range to extract the yellow lane:
 
@@ -93,7 +93,7 @@ output
 
 ![Alt text](output_images/yellow_masked.jpg?raw=true, "Yellow mask")
 
-##4. White lane marking:
+###4. White lane marking:
 
 
 The image was transformed to HSV color space from BGR since HSV can be used to extract particular color component with varying lighting condition.We used the following white color mask range to extract the white lane:
@@ -105,7 +105,7 @@ The image was transformed to HSV color space from BGR since HSV can be used to e
 output
 ![Alt text](output_images/white_masked.jpg?raw=true, "White mask")
 
-##5. Red channel mask:
+###5. Red channel mask:
 
 Although the above two mask were able to identify the yellow and white line at most places, it misses identifying those lines in few parts. To solve this issue we used the mask on R channel of the image. 
 
@@ -116,7 +116,7 @@ Although the above two mask were able to identify the yellow and white line at m
 output
 ![Alt text](output_images/r_masked.jpg?raw=true, "r channel mask")
 
-##6. Combine masking:
+###6. Combine masking:
 
 Since each mask applies a particular filter to the image, we combine them together to achieve the desired output. Below the function to combine two images. 
 
@@ -129,7 +129,7 @@ Since each mask applies a particular filter to the image, we combine them togeth
 output
 ![Alt text](output_images/combined_masked.png?raw=true, "combined mask")
 
-##6. identifying left and right lane:
+###7. identifying left and right lane:
 
 The above filtering helped us to identify the lanes lines with reasonable accuracy. After the lane lines are identified we used to identify the left lane and right lane by creating a histogram over the bottom half of the image. The two peaks of the histogram represent the left lane and right lane respectively. Once the starting point of the each lane is identified in the x direction, we use a sliding window from the bottom of the image to middle half of the image to identify all the non-zero pixel (lane pixel). Then we fit second order polynomial through those points, to identify the lane and its direction using OpenCv's polyfit function. Below is the visualization of histogram
 
@@ -137,7 +137,7 @@ Visualization - Picture from udacity course website
 ![Alt text](output_images/histogram.png?raw=true, "Histogram visualization")
 
 
-##6.The curvature of the road:
+###8.The curvature of the road:
 
 The polynomial fit will return an equation as followed.
 f(y)=Ay**2+By+C 
@@ -166,7 +166,7 @@ Then we fit and measure the curvature as follows.
 ![Alt text](output_images/result_p_transformed.jpg?raw=true, "lane detected")
 
 
-##6. Car offset from the middle of the lane:
+###9. Car offset from the middle of the lane:
 The car's camera can be assumed to be mounted in the center of the car. Calculating the center of the image will give the car position in the image. The difference between the calculated right and left lane divided by the 2 gives the midpoint of the lane. The difference between the center of the image and midpoint of the lane gives the estimate of the car offset from the center.
 
 ```python
@@ -190,7 +190,7 @@ The car's camera can be assumed to be mounted in the center of the car. Calculat
     lane_deviation = (image_mid_point_in_meter - lane_midpoint) * 100;
 ```
 
-##7. Unwarping the image back:
+###10. Unwarping the image back:
 Since all the calculation were performed from bird's-eye view, we need to change it back into perspective transformed image. For this, we need to calculate the inverse of transformation matrix (MInv). We combine the originally distorted image with transformed detected lane image to obtain the final output.
 
 
@@ -205,9 +205,11 @@ def unwarp(original_src,result):
 ![Alt text](output_images/unwarp_image_tranformed.jpg?raw=true, "final output")
 
 
-#Final Output
-Here is the link to my final output
+###Final Output
+Here is the link to my final output. 
 Here's a [link to my video result](./project_video.mp4)
+
+The output.avi files contains the annotated video
 
 The code for this is contained in play.py
 
