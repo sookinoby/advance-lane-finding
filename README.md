@@ -206,15 +206,11 @@ def unwarp(original_src,result):
 
 
 ###Final Output
-Here is the link to my final output. 
-Here's a [link to my video result](./output.avi)
-
-The output.avi files contains the annotated video
-
 The code for this is contained in play.py
-
 The output for the first track is 
 [![Output](output_images/youtube.png?raw=true)](https://youtu.be/HpgY4iph8gg)
+
+The output.avi files contains the annotated video. Here's a [link to my video result](./output.avi)
 
 #Issues
 
