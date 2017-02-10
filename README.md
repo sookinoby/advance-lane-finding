@@ -114,7 +114,7 @@ Although the above two mask were able to identify the yellow and white line at m
 ```
 
 output
-![Alt text](output_images/r_mask.jpg?raw=true, "r channel mask")
+![Alt text](output_images/r_mask.png?raw=true, "r channel mask")
 
 ###6. Combine masking:
 
@@ -207,7 +207,7 @@ def unwarp(original_src,result):
 
 ###Final Output
 Here is the link to my final output. 
-Here's a [link to my video result](./project_video.mp4)
+Here's a [link to my video result](./output.avi)
 
 The output.avi files contains the annotated video
 
